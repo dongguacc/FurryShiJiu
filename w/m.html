@@ -1,1 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>交友主页</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+        header {
+            background-color: #e0e0e0;
+            padding: 20px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+        .avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%; /* 确保头像有圆角 */
+            margin: 0 auto;
+            display: block;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            margin: 20px;
+            border-radius: 5px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        footer {
+            background-color: #e0e0e0;
+            color: black;
+            text-align: center;
+            padding: 10px 0;
+            flex-shrink: 0;
+        }
+    </style>
+    <script>
+        // 检查用户代理，如果是移动设备则重定向到另一个网站
+        if (/Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+            window.location.href = 'https://dongguacc.github.io/FurryShiJiu/w/m';
+        }
 
+        // 禁用头像上的右键功能
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const avatar = document.querySelector('.avatar');
+            if (avatar) {
+                avatar.addEventListener('contextmenu', (e) => {
+                    e.preventDefault();
+                    return false;
+                });
+
+                // 禁用长按事件
+                avatar.addEventListener('touchstart', (e) => {
+                    e.preventDefault();
+                });
+            }
+        });
+    </script>
+</head>
+<body>
+    <header>
+        <img src="https://dongguacc.github.io/FurryShiJiu/My——resources/touxiang.png" alt="头像" class="avatar">
+    </header>
+    <div class="container">
+        <h1>欢迎来到我的交友页面</h1>
+        <p>在这里，你可以找到志同道合的朋友，一起分享快乐和经验。</p>
+        <p>如果你有任何问题或想要交流，请随时联系我。</p>
+        <!-- 你可以在这里添加更多的内容，比如联系方式、个人介绍等 -->
+    </div>
+    <footer>
+        <p>&copy; “拾玖”的交友页面. 保留所有权利.</p>
+    </footer>
+</body>
+</html>
