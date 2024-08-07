@@ -1,1 +1,86 @@
-eval(function(p,a,c,k,e,r){e=function(c){return(c<62?'':e(parseInt(c/62)))+((c=c%62)>35?String.fromCharCode(c+29):c.toString(36))};if('0'.replace(0,e)==0){while(c--)r[e(c)]=k[c];k=[function(e){return r[e]||e}];e=function(){return'([V-Z]|1\\w)'};c=1};while(c--)if(k[c])p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c]);return p}('11(V(p,a,c,k,e,r){e=V(c){W(c<X?\'\':e(12(c/X)))+((c=c%X)>35?14.15(c+29):c.16(36))};Y(\'0\'.Z(0,e)==0){10(c--)r[e(c)]=k[c];k=[V(e){W r[e]||e}];e=V(){W\'[P-U]\'};c=1};10(c--)Y(k[c])p=p.Z(18 19(\'\\\\b\'+e(c)+\'\\\\b\',\'g\'),k[c]);W p}(\'11(Q(p,a,c,k,e,r){e=Q(c){P(c<R?\\\'\\\':e(12(c/R)))+((c=c%R)>35?14.15(c+29):c.16(36))};S(\\\'0\\\'.T(0,e)==0){U(c--)r[e(c)]=k[c];k=[Q(e){P r[e]||e}];e=Q(){P\\\'[2-79a-df-hj-lnoq-vx-zA-O]\\\'};c=1};U(c--)S(k[c])p=p.T(18 19(\\\'\\\\\\\\b\\\'+e(c)+\\\'\\\\\\\\b\\\',\\\'g\\\'),k[c]);P p}(\\\'<!DOCTYPE 9><9 lang="zh-CN"><l><n charset="UTF-8"><n name="viewport"o="a=device-a, initial-scale=1.0"><q>交友主页</q><r>b{font-family:Arial,sans-serif;c:0;5:0;6-4:#f4f4f4;d:2;2-s:t;u:100vh}f{6-4:#v;5:g;x-h:7;2-y:0}.3{a:z;u:z;A-B:50%;c:0 auto;d:block}.C{6-4:white;5:g;c:g;A-B:5px;2-grow:1;d:2;2-s:t;h-items:7;justify-o:7}j{6-4:#v;4:black;x-h:7;5:10px 0;2-y:0}</r><D>E(/Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){window.location.href=\\\\\\\'F://G.H.I/J/w/m\\\\\\\'}K.k(\\\\\\\'DOMContentLoaded\\\\\\\',(event)=>{const 3=K.querySelector(\\\\\\\'.3\\\\\\\');E(3){3.k(\\\\\\\'contextmenu\\\\\\\',(e)=>{e.L();P false});3.k(\\\\\\\'touchstart\\\\\\\',(e)=>{e.L()})}});</D></l><b><f><img src="F://G.H.I/J/MyResources/touxiang.png"M="3"></f><N M="C"><O>欢迎来到我的交友页面</O><p>在这里，你可以找到志同道合的朋友，一起分享快乐和经验。</p><p>如果你有任何问题或想要交流，请随时联系我。</p><!--你可以在这里添加更多的内容，比如联系方式、个人介绍等--></N><j><p>&copy;“拾玖”的交友页面.保留所有权利.</p></j></b></9>\\\',[],51,\\\'||flex|avatar|color|padding|background|center||html|width|body|margin|display||header|20px|align||footer|addEventListener|head||meta|content||title|style|direction|column|height|e0e0e0||text|shrink|150px|border|radius|container|script|S|https|dongguacc|github|io|FurryShiJiu|document|preventDefault|class|div|h1\\\'.1a(\\\'|\\\'),0,{}))\',[],57,\'|||||||||||||||||||||||||||||||||||||||||||||||||||W|V|X|Y|Z|10\'.1a(\'|\'),0,{}))',[],73,'|||||||||||||||||||||||||||||||||||||||||||||||||||||||||function|return|62|if|replace|while|eval|parseInt||String|fromCharCode|toString||new|RegExp|split'.split('|'),0,{}))
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>交友主页</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+        header {
+            background-color: #e0e0e0;
+            padding: 20px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+        .avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%; /* 确保头像有圆角 */
+            margin: 0 auto;
+            display: block;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            margin: 20px;
+            border-radius: 5px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        footer {
+            background-color: #e0e0e0;
+            color: black;
+            text-align: center;
+            padding: 10px 0;
+            flex-shrink: 0;
+        }
+    </style>
+    <script>
+        // 检查用户代理，如果是移动设备则重定向到另一个网站
+        if (/Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+            window.location.href = 'https://dongguacc.github.io/FurryShiJiu/w/m';
+        }
+
+        // 禁用头像上的右键功能
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const avatar = document.querySelector('.avatar');
+            if (avatar) {
+                avatar.addEventListener('contextmenu', (e) => {
+                    e.preventDefault();
+                    return false;
+                });
+
+                // 禁用长按事件
+                avatar.addEventListener('touchstart', (e) => {
+                    e.preventDefault();
+                });
+            }
+        });
+    </script>
+</head>
+<body>
+    <header>
+        <img src="https://dongguacc.github.io/FurryShiJiu/MyResources/touxiang.png" class="avatar">
+    </header>
+    <div class="container">
+        <h1>欢迎来到我的交友页面</h1>
+        <p>在这里，你可以找到志同道合的朋友，一起分享快乐和经验。</p>
+        <p>如果你有任何问题或想要交流，请随时联系我。</p>
+        <!-- 你可以在这里添加更多的内容，比如联系方式、个人介绍等 -->
+    </div>
+    <footer>
+        <p>&copy; “拾玖”的交友页面. 保留所有权利.</p>
+    </footer>
+</body>
+</html>
