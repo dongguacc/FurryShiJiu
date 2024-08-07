@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>主页</title>
+    <title>交友</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -66,11 +66,27 @@
                 });
             }
         });
+
+        // 禁用右键菜单
+        document.addEventListener('contextmenu', (e) => {
+            e.preventDefault();
+            return false;
+        });
+
+        // 禁用F12、Ctrl+S、Ctrl+Shift+I
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'F12' || 
+                (e.ctrlKey && e.key === 's') || 
+                (e.ctrlKey && e.shiftKey && e.key === 'I')) {
+                e.preventDefault();
+                return false;
+            }
+        });
     </script>
 </head>
 <body>
     <header>
-        <img src="https://dongguacc.github.io/FurryShiJiu/MyResources/touxiang.png" class="avatar">
+        <img src="https://dongguacc.github.io/FurryShiJiu/MyResources/touxiang.png" class="avatar" alt="头像">
     </header>
     <div class="container">
         <h1>欢迎来到我的交友页面</h1>

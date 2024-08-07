@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>交友主页</title>
+    <title>交友</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -47,6 +47,24 @@
         }
     </style>
     <script>
+        // 禁用F12、Ctrl+S、Ctrl+Shift+I
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'F12') {
+                event.preventDefault();
+            }
+            if (event.ctrlKey && event.key === 's') {
+                event.preventDefault();
+            }
+            if (event.ctrlKey && event.shiftKey && event.key === 'I') {
+                event.preventDefault();
+            }
+        });
+
+        // 禁用右键菜单
+        document.addEventListener('contextmenu', function(event) {
+            event.preventDefault();
+        });
+
         // 检查用户代理，如果是移动设备则重定向到另一个网站
         if (/Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
             window.location.href = 'https://dongguacc.github.io/FurryShiJiu/w/m';
