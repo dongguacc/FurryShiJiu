@@ -16,24 +16,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 <!--[if lt IE 9]><script src="js/html5shiv.js"></script><![endif]-->
 <!--[if lt IE 9]><script src="js/respond.js"></script><![endif]-->
-<script>
-    // 检测用户代理并重定向
-    function checkUserAgentAndRedirect() {
-        // 获取用户代理字符串
-        var userAgent = navigator.userAgent || navigator.vendor || window.opera;
-
-        // 检测是否为移动设备
-        if (/android|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(userAgent.toLowerCase())) {
-            // 如果是移动设备，重定向到指定URL
-            window.location.href = "https://dongguacc.github.io/FurryShiJiu/s/a";
-        }
-    }
-
-    // 页面加载完成后执行检测
-    window.onload = function() {
-        checkUserAgentAndRedirect();
-    };
-</script>
 </head>
 
 <body>
