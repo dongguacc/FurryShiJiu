@@ -19,21 +19,6 @@ document.addEventListener('keydown', function(e) {
     }
 });
 
-/*尝试检测开发者工具的打开状态*/
-(function() {
-    const devtools = /./;
-    devtools.toString = function() {
-        this.opened = true;
-    };
-    setInterval(function() {
-        console.log(devtools);
-        if (devtools.opened) {
-            alert('开发者工具已被检测到，请关闭！');
-            devtools.opened = false;
-        }
-    }, 1000);
-})();
-
 /*自定义右键菜单*/
 document.addEventListener('contextmenu', function(e) {
     e.preventDefault();
