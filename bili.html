@@ -1,0 +1,58 @@
+async function fetchRecommendedVideos() {
+    const apiUrl = 'https://api.bilibili.com/x/web-interface/wbi/index/top/feed/rcmd';
+    try {
+        const response = await fetch(apiUrl);
+        const data = await response.json();
+        if (data.code === 0 && data.data && data.data.items) {
+            displayVideos(data.data.items);
+        } else {
+            console.error('获取视频数据失败:', data.message);
+        }
+    } catch (error) {
+        console.error('请求失败:', error);
+    }
+}
+
+function displayVideos(videos) {
+    const container = document.getElementById('videoContainer');
+    videos.forEach(video => {
+        const bvid = video.bvid;
+        fetchVideoDetails(bvid).then(details => {
+            const card = document.createElement('div');
+            card.className = 'video-card';
+
+            const img = document.createElement('img');
+            img.src = details.pic;
+            card.appendChild(img);
+
+            const info = document.createElement('div');
+            info.className = 'video-info';
+            info.innerHTML = `
+                <h2>${details.title}</h2>
+                <p>播放数: ${details.stat.view}</p>
+                <p>点赞数: ${details.stat.like}</p>
+                <p>评论数: ${details.stat.reply}</p>
+            `;
+            card.appendChild(info);
+
+            container.appendChild(card);
+        });
+    });
+}
+
+async function fetchVideoDetails(bvid) {
+    const apiUrl = `https://api.bilibili.com/x/web-interface/view?bvid=${bvid}`;
+    try {
+        const response = await fetch(apiUrl);
+        const data = await response.json();
+        if (data.code === 0 && data.data) {
+            return data.data;
+        } else {
+            console.error('获取视频详细信息失败:', data.message);
+        }
+    } catch (error) {
+        console.error('请求失败:', error);
+    }
+}
+
+fetchRecommendedVideos();
