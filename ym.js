@@ -1,27 +1,21 @@
-/*禁用F12键*/
+let currentMenu = null;
+
 document.addEventListener('keydown', function(e) {
-    if (e.key === 'F12') {
+    if (e.key === 'F12' || 
+        (e.ctrlKey && e.key === 's') || 
+        ((e.ctrlKey && e.shiftKey && e.key === 'I') || (e.metaKey && e.altKey && e.key === 'I'))) {
         e.preventDefault();
     }
 });
 
-/*禁用Ctrl+S键*/
-document.addEventListener('keydown', function(e) {
-    if (e.ctrlKey && e.key === 's') {
-        e.preventDefault();
-    }
-});
-
-/*禁用Ctrl+Shift+I*/
-document.addEventListener('keydown', function(e) {
-    if ((e.ctrlKey && e.shiftKey && e.key === 'I') || (e.metaKey && e.altKey && e.key === 'I')) {
-        e.preventDefault();
-    }
-});
-
-/*自定义右键菜单*/
 document.addEventListener('contextmenu', function(e) {
     e.preventDefault();
+    
+    if (currentMenu) {
+        document.body.removeChild(currentMenu);
+        currentMenu = null;
+    }
+
     const menu = document.createElement('div');
     menu.style.position = 'absolute';
     menu.style.top = `${e.clientY}px`;
@@ -32,16 +26,43 @@ document.addEventListener('contextmenu', function(e) {
     menu.style.padding = '5px';
     menu.style.borderRadius = '8px';
     menu.innerHTML = `
-        <div style="cursor:pointer;padding:5px;border-radius:4px;" onclick="document.execCommand('selectAll')">全选</div>
-        <div style="cursor:pointer;padding:5px;border-radius:4px;" onclick="document.execCommand('copy')">复制</div>
-        <div style="cursor:pointer;padding:5px;border-radius:4px;" onclick="document.execCommand('paste')">粘贴</div>
+        <div style="cursor:pointer;padding:5px;border-radius:4px;" onclick="selectAll()">全选</div>
+        <div style="cursor:pointer;padding:5px;border-radius:4px;" onclick="copyText()">复制</div>
+        <div style="cursor:pointer;padding:5px;border-radius:4px;" onclick="pasteText()">粘贴</div>
     `;
     document.body.appendChild(menu);
+    currentMenu = menu;
 
     function removeMenu() {
-        document.body.removeChild(menu);
+        if (currentMenu) {
+            document.body.removeChild(currentMenu);
+            currentMenu = null;
+        }
         document.removeEventListener('click', removeMenu);
     }
 
     document.addEventListener('click', removeMenu);
 });
+
+function selectAll() {
+    document.getSelection().removeAllRanges();
+    const range = document.createRange();
+    range.selectNodeContents(document.body);
+    document.getSelection().addRange(range);
+}
+
+function copyText() {
+    navigator.clipboard.writeText(document.getSelection().toString()).then(() => {
+        console.log('Text copied to clipboard');
+    }).catch(err => {
+        console.error('Could not copy text: ', err);
+    });
+}
+
+function pasteText() {
+    navigator.clipboard.readText().then(text => {
+        document.execCommand('insertText', false, text);
+    }).catch(err => {
+        console.error('Could not paste text: ', err);
+    });
+}
