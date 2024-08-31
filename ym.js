@@ -1,5 +1,6 @@
 let currentMenu = null;
 
+// 监听键盘事件，阻止特定组合键的默认行为
 document.addEventListener('keydown', function(e) {
     if (e.key === 'F12' || 
         (e.ctrlKey && e.key === 's') || 
@@ -8,9 +9,11 @@ document.addEventListener('keydown', function(e) {
     }
 });
 
+// 监听右键菜单事件，自定义右键菜单
 document.addEventListener('contextmenu', function(e) {
     e.preventDefault();
     
+    // 移除之前的菜单
     if (currentMenu) {
         document.body.removeChild(currentMenu);
         currentMenu = null;
@@ -33,6 +36,7 @@ document.addEventListener('contextmenu', function(e) {
     document.body.appendChild(menu);
     currentMenu = menu;
 
+    // 移除右键菜单的函数
     function removeMenu() {
         if (currentMenu) {
             document.body.removeChild(currentMenu);
@@ -44,13 +48,29 @@ document.addEventListener('contextmenu', function(e) {
     document.addEventListener('click', removeMenu);
 });
 
+// 全选文本的函数
 function selectAll() {
     document.getSelection().removeAllRanges();
+    const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null, false);
     const range = document.createRange();
-    range.selectNodeContents(document.body);
+
+    let firstNode = true;
+    while (walker.nextNode()) {
+        const textNode = walker.currentNode;
+        if (textNode.nodeValue.trim() !== '') {
+            if (firstNode) {
+                range.selectNodeContents(textNode);
+                firstNode = false;
+            } else {
+                range.setEndAfter(textNode);
+            }
+        }
+    }
+
     document.getSelection().addRange(range);
 }
 
+// 复制选中文本的函数
 function copyText() {
     navigator.clipboard.writeText(document.getSelection().toString()).then(() => {
         console.log('Text copied to clipboard');
@@ -59,6 +79,7 @@ function copyText() {
     });
 }
 
+// 粘贴剪贴板内容的函数
 function pasteText() {
     navigator.clipboard.readText().then(text => {
         document.execCommand('insertText', false, text);
