@@ -4,7 +4,7 @@ function redirectBasedOnUA() {
         const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
         const currentHref = window.location.href;
 
-        const mobileTarget = 'https://dongguacc.github.io/furry19/d/aa';
+        const mobileTarget = 'https://dongguacc.github.io/furry19/d/a';
         const desktopTarget = 'https://dongguacc.github.io/furry19/d/a';
 
         if (isMobile) {
