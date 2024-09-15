@@ -4,8 +4,8 @@ function redirectBasedOnUA() {
         const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
         const currentHref = window.location.href;
 
-        const mobileTarget = 'https://furry19sj.github.io/a';
-        const desktopTarget = 'https://furry19sj.github.io/a';
+        const mobileTarget = 'https://furry19sj.github.io/d/a';
+        const desktopTarget = 'https://furry19sj.github.io/d/a';
 
         if (isMobile) {
             // 如果是手机访问
