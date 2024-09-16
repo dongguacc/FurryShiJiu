@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="expires" content="0" />
+    <title>拾玖的个人网站</title>
+    <link rel="icon" href="src/favicon.png" type="image/x-icon">
+    <style>
+        body {
+            margin: 0; /* 去掉默认边距 */
+            display: flex; /* 使用弹性布局 */
+            justify-content: center; /* 水平居中 */
+            align-items: stretch; /* 垂直拉伸以匹配容器高度 */
+            transition: opacity 0.5s ease; /* 添加淡出效果 */
+            opacity: 1; /* 初始不透明度 */
+            position: relative; /* 设为相对定位以便后续定位使用 */
+        }
+        #bg-container {
+            position: fixed; /* 使背景视频固定 */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden; /* 隐藏溢出内容 */
+            z-index: -1; /* 使背景层在内容层后面 */
+        }
+        #background-video {
+            width: 100%; /* 视频宽度 */
+            height: 100%; /* 视频高度 */
+            object-fit: cover; /* 覆盖填充 */
+        }
+        #container {
+            display: flex; /* 使用 Flexbox 布局 */
+            flex-grow: 1; /* 让内容区域占据剩余空间 */
+            width: 100%; /* 确保容器占满可用空间 */
+        }
+        #info {
+            flex: 0 0 300px; /* 固定宽度为300px */
+            display: flex; /* 使用 Flexbox 显示内部元素 */
+            flex-direction: column; /* 纵向布局 */
+        }
+        #content {
+            flex-grow: 1; /* 让内容区域占据剩余空间 */
+            min-width: 800px; /* 设置最小宽度 */
+            max-width: 1200px; /* 设置最大宽度 */
+            margin: 0 0px; /* 调整左右间距 */
+            display: flex; /* 使用 Flexbox 布局 */
+            flex-direction: column; /* 纵向排列 */
+            align-items: center; /* 内容居中对齐 */
+        }
+        .content-box {
+            background-color: rgba(255, 255, 255, 0.9); /* 内容框体的背景色 */
+            border-radius: 10px; /* 圆角 */
+            padding: 10px; /* 内间距 */
+            text-align: center; /* 文本居中对齐 */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 添加阴影效果 */
+            margin: 20px; /* 增加上下间距 */
+            width: 100%; /* 设置内容框宽度为100% */
+            max-width: 800px; /* 设置内容框最大宽度 */
+        }
+        .info-box {
+            background-color: rgba(255, 255, 255, 0.9); /* 个人信息框的背景色 */
+            border-radius: 10px; /* 圆角 */
+            padding: 5px; /* 内间距 */
+            width: 230px; /* 固定宽度 */
+            text-align: center; /* 内容居中对齐 */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 添加阴影效果 */
+            margin: 20px; /* 增加上下间距 */
+        }
+        .avatar {
+            width: 85px; /* 头像宽度 */
+            height: 85px; /* 头像高度 */
+            border-radius: 50%; /* 头像圆角 */
+            margin-bottom: 5px; /* 底部间隔 */
+        }
+        .qr-code-container {
+            position: relative; /* 设置二维码容器为相对定位 */
+            display: inline-block; /* 使二维码容器为块级元素 */
+        }
+        .qr-code {
+            display: none; /* 初始隐藏二维码 */
+            position: absolute; /* 设置为绝对定位 */
+            bottom: 100%; /* 移动到按钮上方 */
+            border-radius: 10px; /* 圆角 */
+            left: 50%; /* 水平居中 */
+            transform: translateX(-50%); /* 调整位置 */
+            background: white; /* 背景设为白色 */
+            border: 1px solid #ccc; /* 边框 */
+            padding: 5px; /* 内间距 */
+            z-index: 10; /* 确保二维码在前 */
+        }
+        .qr-code-container:hover .qr-code {
+            display: block; /* 鼠标悬停时显示二维码 */
+        }
+        a {
+            color: black; /* 将链接文字颜色设置为黑色 */
+            text-decoration: none; /* 去掉下划线 */
+        }
+        #bg-container {
+            position: fixed; /* 使背景视频固定 */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden; /* 隐藏溢出内容 */
+            z-index: -1; /* 使背景层在内容层后面 */
+        }
+
+        #background-video {
+            width: 100%; /* 视频宽度 */
+            height: 100%; /* 视频高度 */
+            object-fit: cover; /* 覆盖填充 */
+        }
+
+        #fallback-image {
+            display: none; /* 默认隐藏备用背景图 */
+        }
+
+        @media not all and (video) {
+            #background-video {
+                display: none; /* 如果不支持视频则隐藏视频 */
+            }
+            #fallback-image {
+                display: block; /* 显示备用背景图 */
+                width: 100%;
+                height: 100%;
+            }
+        }
+    </style>
+    <script>
+        // 定义可用的背景视频数组
+        const backgroundVideos = [
+            "src/beijing1.mp4", 
+            "src/beijing2.mp4", 
+            "src/beijing3.mp4"
+            "src/beijing4.mp4"
+            "src/beijing5.mp4"
+        ];
+    
+        window.onload = function() {
+            // 随机选择一个视频
+            const randomIndex = Math.floor(Math.random() * backgroundVideos.length);
+            const selectedVideo = backgroundVideos[randomIndex];
+    
+            // 设置选择的视频作为背景视频
+            const videoElement = document.getElementById('background-video');
+            videoElement.src = selectedVideo;
+    
+            // 继续原有的屏幕宽度检查逻辑
+            if (window.innerWidth < 1200) {
+                window.location.href = "p.html";
+            }
+        };
+    </script>
+</head>
+<body>
+    <div id="bg-container">
+        <video autoplay muted loop id="background-video">
+            <source src="src/beijing1.mp4" type="video/mp4">
+            <img src="src/beijing1.jpg" alt="备用背景图" id="fallback-image">
+        </video>
+    </div>
+    
+    <div id="c114514"> <!-- 主容器 -->
+        <div id="container"> <!-- 包含信息和内容的容器 -->
+            <div id="info"> <!-- 个人信息区域 -->
+                <div class="info-box"> <!-- 个人信息框 -->
+                    <h2>个人信息</h2> <!-- 个人信息标题 -->
+                    <img src="http://q1.qlogo.cn/g?b=qq&nk=2371065680&s=100" alt="头像" class="avatar"> <!-- 头像 -->
+                    <p class="name">兽奴拾玖</p>
+                </div>
+
+                <div class="info-box" style="display: flex; align-items: center; justify-content: center;"> <!-- 信息框，包含二维码 -->
+                    <div class="qr-code-container"> <!-- 二维码容器 -->
+                        <div class="qr-code"> <!-- 二维码隱藏盒 -->
+                            <p>QQ扫一扫</br>加好友</p> <!-- 二维码提示 -->
+                            <div title="单击放大"><a href="../src/qq.png"><img src="../src/qq.png" alt="二维码" width="100" height="100"></a></div> <!-- 二维码图片 -->
+                        </div>
+                        <a href="https://tool.gljlw.com/qq/?qq=2371065680" target="_new"> <!-- QQ链接 -->
+                            <img src="https://activity.hdslb.com/zzjs/20160608appDownload/img/pc/icon-qq1.png" alt="图标" width="50px" height="50px"> <!-- QQ图标 -->
+                        </a>
+                    </div>
+                    <a href="https://space.bilibili.com/1222132945" target="_new" style="margin-left: 10px;"> <!-- B站链接 -->
+                        <img src="https://ts2.cn.mm.bing.net/th?id=ODLS.e42d2c4d-ad65-4c7a-b0fd-817a1c3bed01&w=32&h=32&qlt=90&pcl=fffffa&o=6&pid=1.2" alt="图标" width="40px" height="40px"> <!-- B站图标 -->
+                    </a>
+                    <a href="mailto://a23710656@163.com" target="_new" style="margin-left: 10px;"> <!-- 邮件链接 -->
+                        <img src="https://ts2.cn.mm.bing.net/th?id=ODLS.112e55dc-4008-476c-bb39-88b4f8adb808&w=32&h=32&qlt=96&pcl=fffffa&o=6&pid=1.2" alt="图标" width="40px" height="40px"> <!-- 邮件图标 -->
+                    </a>
+                </div>
+
+                <div class="info-box"><!-- 生日倒计时 -->
+                    <div id="countdown">生日倒计时加载中...</div>
+                    <div id="site-timer">建站正计时加载中...</div> <!-- 新增的建站正计时 -->
+
+                    <script>
+                        // 设置目标日期和时间（格式：年, 月, 日, 时, 分, 秒）
+                        const targetDate = new Date('2024-11-28T00:00:00').getTime();
+                
+                        const countdownElement = document.getElementById('countdown');
+
+                        const countdown = setInterval(function() {
+                            // 获取当前时间
+                            const now = new Date().getTime();
+
+                            // 计算剩余时间
+                            const remainingTime = targetDate - now;
+
+                            // 如果剩余时间小于0，表示时间到达
+                            if (remainingTime < 0) {
+                                clearInterval(countdown);
+                                countdownElement.textContent = "生日快乐！";
+                                return;
+                            }
+
+                            // 计算天、小时、分钟和秒
+                            const days = Math.floor(remainingTime / (1000 * 60 * 60 * 24));
+                            const hours = Math.floor((remainingTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                            const minutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
+                            const seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
+
+                            // 更新倒计时显示
+                            countdownElement.textContent = 
+                                `生日:${days}天 ${hours}小时 ${minutes}分钟 ${seconds}秒`;
+                        }, 100); // 每100毫秒（0.1秒）更新一次
+
+                        // 建站正计时
+                        const startTime = new Date('2024-09-16T15:45:00').getTime(); // 假设建站日期为2023/9/16
+                        const siteTimerElement = document.getElementById('site-timer');
+
+                        const siteTimer = setInterval(function() {
+                            // 获取当前时间
+                            const now = new Date().getTime();
+
+                            // 计算经过的时间
+                            const elapsedTime = now - startTime;
+
+                            // 计算天、小时、分钟和秒
+                            const days = Math.floor(elapsedTime / (1000 * 60 * 60 * 24));
+                            const hours = Math.floor((elapsedTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                            const minutes = Math.floor((elapsedTime % (1000 * 60 * 60)) / (1000 * 60));
+                            const seconds = Math.floor((elapsedTime % (1000 * 60)) / 1000);
+
+                            // 更新正计时显示
+                            siteTimerElement.textContent =
+                                `建站:${days}天 ${hours}小时 ${minutes}分钟 ${seconds}秒`;
+                        }, 100); // 每100毫秒（0.1秒）更新一次
+                    </script>
+                </div>
+            </div>
+            
+            <div id="content"> <!-- 内容区域 -->
+                <a href="html/article/1.html"><div class="content-box"> <!-- 内容框 -->
+                    <h1>2024/9/16 网站第一次测试</h1> <!-- 主要标题 -->
+                    <p>欢迎来到拾玖的个人网站，这里将会分享一些个人的兴趣爱好，以及一些技术相关的文章。</p> <!-- 欢迎信息 -->
+                    <p>网站测试期间，网站将会进行大量的改版，网站的功能将会逐渐增加，欢迎大家的反馈。</p> <!-- 测试信息 -->
+                </div></a>       
+            </div>
+        </div>
+    </div>
+</body>
+</html>
