@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh"> <!-- 声明文档类型和语言 -->
+<head>
+    <meta charset="UTF-8"> <!-- 设置字符编码为 UTF-8 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- 视口设置 -->
+    <title>拾玖的个人网站</title> <!-- 文档标题 -->
+    <link rel="icon" href="../../src/favicon.png" type="image/x-icon">
+    <style>
+        body {
+            margin: 0; /* 去掉默认边距 */
+            display: flex; /* 使用弹性布局 */
+            justify-content: center; /* 水平居中 */
+            align-items: stretch; /* 垂直拉伸以匹配容器高度 */
+            height: 100vh; /* 设置视口高度 */
+            overflow: hidden; /* 隐藏溢出内容 */
+        }
+        #bg-container {
+            position: fixed; /* 使背景视频固定 */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* 使背景层在内容层后面 */
+        }
+        #background-video {
+            width: 100%; /* 视频宽度 */
+            height: 100%; /* 视频高度 */
+            object-fit: cover; /* 覆盖填充 */
+        }
+        #fallback-image {
+            display: none; /* 默认隐藏备用背景图 */
+            width: 100%; /* 确保备用背景图占满全宽 */
+            height: 100%; /* 确保备用背景图占满全高 */
+        }
+        #content {
+            flex-grow: 1; /* 让内容区域占据剩余空间 */
+            min-width: 200px; /* 设置最小宽度 */
+            margin: 0 10px; /* 调整左右间距 */
+            display: flex; /* 使用 Flexbox 布局 */
+            flex-direction: column; /* 纵向排列 */
+            align-items: center; /* 内容居中对齐 */
+        }
+        .content-box {
+            background-color: rgba(255, 255, 255, 0.9); /* 内容框体的背景色 */
+            border-radius: 10px; /* 圆角 */
+            padding: 10px; /* 内间距 */
+            text-align: center; /* 文本居中对齐 */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 添加阴影效果 */
+            margin: 20px; /* 增加上下间距 */
+            width: 100%; /* 设置内容框宽度为100% */
+            max-width: 67%; /* 设置内容框最大宽度 */
+        }
+        a {
+            color: black; /* 将链接文字颜色设置为黑色 */
+            text-decoration: none; /* 去掉下划线 */
+        }
+    </style>
+   <script src="background.js"></script>
+</head>
+<body>
+    <div id="bg-container">
+        <video autoplay muted loop id="background-video">
+            <img src="../../src/background/png/1.jpg" alt="备用背景图" id="fallback-image">
+        </video>
+    </div>
+    
+    <div id="content"> <!-- 内容区域 -->
+        <div class="content-box"> <!-- 内容框 -->
+            <h1>2024/9/16 网站第一次测试</h1> <!-- 主要标题 -->
+            <hr> <!-- 分割线 -->
+            <p>欢迎来到拾玖的个人网站，这里将会分享一些个人的兴趣爱好，以及一些技术相关的文章。</p> <!-- 欢迎信息 -->
+            <p>网站测试期间，网站将会进行大量的改版，网站的功能将会逐渐增加，欢迎大家的反馈。</p> <!-- 测试信息 -->
+        </div>     
+    </div>
+    
+    <a href="../../index.html" id="exit-button" title="返回首页">
+        <img src="https://s1.aigei.com/prevfiles/0df1470f5ce6471d911064c4c753615e.png?e=1735488000&token=P7S2Xpzfz11vAkASLTkfHN7Fw-oOZBecqeJaxypL:EdKUxTUPK_UBxovzjxzG7sBAHr0=" alt="退出" style="width: 50px; height: 50px; position: absolute; top: 20px; left: 20px;">
+    </a>
+</body>
+</html>

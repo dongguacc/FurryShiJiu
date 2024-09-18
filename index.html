@@ -99,22 +99,6 @@
             color: black; /* 将链接文字颜色设置为黑色 */
             text-decoration: none; /* 去掉下划线 */
         }
-        #bg-container {
-            position: fixed; /* 使背景视频固定 */
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden; /* 隐藏溢出内容 */
-            z-index: -1; /* 使背景层在内容层后面 */
-        }
-
-        #background-video {
-            width: 100%; /* 视频宽度 */
-            height: 100%; /* 视频高度 */
-            object-fit: cover; /* 覆盖填充 */
-        }
-
         #fallback-image {
             display: none; /* 默认隐藏备用背景图 */
         }
@@ -130,37 +114,12 @@
             }
         }
     </style>
-    <script>
-        // 定义可用的背景视频数组
-        const backgroundVideos = [
-            "src/beijing1.mp4", 
-            "src/beijing2.mp4", 
-            "src/beijing3.mp4"
-            "src/beijing4.mp4"
-            "src/beijing5.mp4"
-        ];
-    
-        window.onload = function() {
-            // 随机选择一个视频
-            const randomIndex = Math.floor(Math.random() * backgroundVideos.length);
-            const selectedVideo = backgroundVideos[randomIndex];
-    
-            // 设置选择的视频作为背景视频
-            const videoElement = document.getElementById('background-video');
-            videoElement.src = selectedVideo;
-    
-            // 继续原有的屏幕宽度检查逻辑
-            if (window.innerWidth < 1200) {
-                window.location.href = "p.html";
-            }
-        };
-    </script>
+    <script src="background.js"></script>
 </head>
 <body>
     <div id="bg-container">
         <video autoplay muted loop id="background-video">
-            <source src="src/beijing1.mp4" type="video/mp4">
-            <img src="src/beijing1.jpg" alt="备用背景图" id="fallback-image">
+            <img src="src/background/png/1.jpg" alt="备用背景图" id="fallback-image">
         </video>
     </div>
     
