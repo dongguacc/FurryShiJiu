@@ -111,17 +111,6 @@
         }
     </style>
     <script>
-        // 检查用户代理
-        function isDesktop() {
-            return window.navigator.userAgent.indexOf('Win') !== -1 ||
-                window.navigator.userAgent.indexOf('Mac') !== -1 ||
-                window.navigator.userAgent.indexOf('Linux') !== -1;
-        }
-
-        // 如果是电脑访问，跳转到index.html
-        if (isDesktop()) {
-            window.location.href = 'index.html';
-        }
         const backgroundVideos = [ /* 背景视频数组 */
             "src/background/mp4/1.mp4", 
             "src/background/mp4/2.mp4", 
