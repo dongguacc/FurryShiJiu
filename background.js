@@ -3,8 +3,7 @@ const backgroundVideos = [
     "src/background/mp4/1.mp4", 
     "src/background/mp4/2.mp4", 
     "src/background/mp4/3.mp4",
-    "src/background/mp4/4.mp4",
-    "src/background/mp4/5.mp4"
+    "src/background/mp4/4.mp4"
 ];
 
 window.onload = function() {
