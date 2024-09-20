@@ -148,16 +148,18 @@
         window.onload = function() { /* 网页加载完成时执行 */
             loadBackgroundVideo(); // 加载随机背景视频
             loadContent(); // 加载外部内容
+            };
+        // 检查用户代理
+        function isDesktop() {
+            return window.navigator.userAgent.indexOf('Win') !== -1 ||
+                window.navigator.userAgent.indexOf('Mac') !== -1 ||
+                window.navigator.userAgent.indexOf('Linux') !== -1;
+        }
 
-            // 获取用户代理字符串
-            var userAgent = navigator.userAgent;
-
-            // 判断窗口宽度和用户代理
-            if (window.innerWidth > 1200 || userAgent.indexOf('Windows') !== -1 || userAgent.indexOf('Macintosh') !== -1 || userAgent.indexOf('Linux') !== -1) { 
-                /* 如果窗口宽度大于1200像素，或者是电脑用户代理 */
-                window.location.href = "index.html"; /* 跳转到index.html */
-            }
-        };
+        // 如果是电脑访问，跳转到index.html
+        if (isDesktop()) {
+            window.location.href = 'index.html';
+        }
 
     </script>
 </head>

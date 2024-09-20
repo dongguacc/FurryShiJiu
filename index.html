@@ -147,13 +147,16 @@
         window.onload = function() { /* 网页加载完成时执行 */
             loadBackgroundVideo(); // 加载随机背景视频
             loadContent(); // 加载外部内容
-
-            // 检查窗口宽度和用户代理
-            if (window.innerWidth < 1200 || /Mobile|Android|iP(hone|od|ad)/.test(navigator.userAgent)) { 
-                /* 如果窗口宽度小于1200像素或UA为手机设备 */
-                window.location.href = "p.html"; /* 跳转到p.html */
-            }
         };
+        // 检查用户代理
+        function isMobile() {
+            return /Android|iPhone|iPad|iPod|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        }
+
+        // 如果是手机访问，跳转到p.html
+        if (isMobile()) {
+            window.location.href = 'p.html';
+        }
 
     </script>
 </head>
