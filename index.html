@@ -128,25 +128,30 @@
         }
     </style>
     <script>
-        const backgroundVideos = [
+        // background.js
+        const backgroundVideos = [ /* 背景视频数组 */
             "src/background/mp4/1.mp4", 
             "src/background/mp4/2.mp4", 
             "src/background/mp4/3.mp4",
             "src/background/mp4/4.mp4"
         ];
 
-        window.onload = function() {
-            const randomIndex = Math.floor(Math.random() * backgroundVideos.length);
-            const selectedVideo = backgroundVideos[randomIndex];
+        const loadBackgroundVideo = () => { /* 加载随机背景视频函数 */
+            const randomIndex = Math.floor(Math.random() * backgroundVideos.length); /* 随机索引 */
+            const selectedVideo = backgroundVideos[randomIndex]; /* 选择随机视频 */
 
-            const videoElement = document.getElementById('background-video');
-            videoElement.src = selectedVideo;
-
-            if (window.innerWidth < 1200) {
-        window.location.href = "p.html";
-            }
+            const videoElement = document.getElementById('background-video'); /* 获取视频元素 */
+            videoElement.src = selectedVideo; /* 设置视频源 */
         };
 
+        window.onload = function() { /* 网页加载完成时执行 */
+            loadBackgroundVideo(); // 加载随机背景视频
+            loadContent(); // 加载外部内容
+
+            if (window.innerWidth < 1200) { /* 如果窗口宽度小于1200像素 */
+                window.location.href = "p.html"; /* 跳转到p.html */
+            }
+        };
     </script>
 </head>
 <body>
@@ -227,17 +232,17 @@
             </div>
             
             <div id="content">
-                <div class="content-box"> <!-- 内容 -->
-                    <h1>2024/9/20 网站第二次测试</h1>
-                    <p>——修改了布局</p>
+                <div class="content-box">
+                    <h1>2024/9/20 更新日志</h1>
+                    <p>—修改了布局</p>
+                    <p>—制作手机界面</p>
                 </div>
-                <div class="content-box">  <!-- 内容 -->
-                    <h1>2024/9/16 网站第一次测试</h1>
+                <div class="content-box">
+                    <h1>2024/9/16 网站测试</h1>
                     <p>欢迎来到拾玖的个人网站，这里将会分享一些个人的兴趣爱好，以及一些技术相关的文章。</p>
                     <p>网站测试期间，网站将会进行大量的改版，网站的功能将会逐渐增加，欢迎大家的反馈。</p>
                 </div>
             </div>
-        </div>
     </div>
 
     <div class="footer"> <!-- 页脚 -->
