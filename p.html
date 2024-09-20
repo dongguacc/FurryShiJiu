@@ -111,7 +111,17 @@
         }
     </style>
     <script>
-        // background.js
+        // 检查用户代理
+        function isDesktop() {
+            return window.navigator.userAgent.indexOf('Win') !== -1 ||
+                window.navigator.userAgent.indexOf('Mac') !== -1 ||
+                window.navigator.userAgent.indexOf('Linux') !== -1;
+        }
+
+        // 如果是电脑访问，跳转到index.html
+        if (isDesktop()) {
+            window.location.href = 'index.html';
+        }
         const backgroundVideos = [ /* 背景视频数组 */
             "src/background/mp4/1.mp4", 
             "src/background/mp4/2.mp4", 
@@ -129,7 +139,7 @@
 
         function loadContent() { /* 加载内容函数 */
             const xhr = new XMLHttpRequest(); /* 创建XMLHttpRequest对象 */
-            xhr.open('GET', 'index.html', true); /* 初始化请求 */
+            xhr.open('GET', 'w.html', true); /* 初始化请求 */
             xhr.onload = function() { /* 当请求加载完成时 */
                 if (xhr.status === 200) { /* 如果请求成功 */
                     // 创建一个临时 DOM 元素来解析返回的 HTML
@@ -144,22 +154,10 @@
             xhr.send(); /* 发送请求 */
         }
 
-
         window.onload = function() { /* 网页加载完成时执行 */
             loadBackgroundVideo(); // 加载随机背景视频
             loadContent(); // 加载外部内容
             };
-        // 检查用户代理
-        function isDesktop() {
-            return window.navigator.userAgent.indexOf('Win') !== -1 ||
-                window.navigator.userAgent.indexOf('Mac') !== -1 ||
-                window.navigator.userAgent.indexOf('Linux') !== -1;
-        }
-
-        // 如果是电脑访问，跳转到index.html
-        if (isDesktop()) {
-            window.location.href = 'index.html';
-        }
 
     </script>
 </head>
