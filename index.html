@@ -148,10 +148,13 @@
             loadBackgroundVideo(); // 加载随机背景视频
             loadContent(); // 加载外部内容
 
-            if (window.innerWidth < 1200) { /* 如果窗口宽度小于1200像素 */
+            // 检查窗口宽度和用户代理
+            if (window.innerWidth < 1200 || /Mobile|Android|iP(hone|od|ad)/.test(navigator.userAgent)) { 
+                /* 如果窗口宽度小于1200像素或UA为手机设备 */
                 window.location.href = "p.html"; /* 跳转到p.html */
             }
         };
+
     </script>
 </head>
 <body>

@@ -149,10 +149,16 @@
             loadBackgroundVideo(); // 加载随机背景视频
             loadContent(); // 加载外部内容
 
-            if (window.innerWidth > 1200) { /* 如果窗口宽度大于1200像素 */
+            // 获取用户代理字符串
+            var userAgent = navigator.userAgent;
+
+            // 判断窗口宽度和用户代理
+            if (window.innerWidth > 1200 || userAgent.indexOf('Windows') !== -1 || userAgent.indexOf('Macintosh') !== -1 || userAgent.indexOf('Linux') !== -1) { 
+                /* 如果窗口宽度大于1200像素，或者是电脑用户代理 */
                 window.location.href = "index.html"; /* 跳转到index.html */
             }
         };
+
     </script>
 </head>
 <body>
