@@ -364,8 +364,24 @@ function initialize() {
   cellSize = W / cells;
   snake = new Snake();
   food = new Food();
+
+  // 检查 Cookie 并提示用户
+  checkCookieConsent();
+
   dom_replay.addEventListener("click", reset, false);
   loop();
+}
+
+function checkCookieConsent() {
+  let consent = getCookie("cookieConsent");
+  
+  if (!consent) {  // 如果没有同意记录 Cookie，则显示询问窗口
+    let userConsent = confirm("我们使用 Cookie 来存储您的游戏最高分数。您是否同意使用 Cookie？");
+
+    if (userConsent) {
+      setCookie("cookieConsent", "true", 365); // 记录用户同意
+    }
+  }
 }
 
 function loop() {
@@ -388,7 +404,12 @@ function loop() {
 function gameOver() {
   maxScore ? null : (maxScore = score);
   score > maxScore ? (maxScore = score) : null;
-  setCookie("maxScore", maxScore, 365); // 保存最佳记录到 Cookie，有效期为 365 天
+  
+  // 只有在用户同意的情况下才记录最高分
+  if (getCookie("cookieConsent")) {
+    setCookie("maxScore", maxScore, 365);
+  }
+  
   CTX.fillStyle = "#4cffd7";
   CTX.textAlign = "center";
   CTX.font = "bold 30px Poppins, sans-serif";

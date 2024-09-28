@@ -65,7 +65,7 @@ a {
     width: 1200px; /* 设置宽度 */
     }
 .nav-list a:hover {
-    background: rgb(108, 199, 217, 0.5); /* 更深的橙色 */
+    background: rgb(108, 199, 217, 0.5);
 }
 .nav-list a{
     display: block;
