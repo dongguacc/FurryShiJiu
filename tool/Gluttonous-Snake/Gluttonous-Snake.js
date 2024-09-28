@@ -376,7 +376,7 @@ function checkCookieConsent() {
   let consent = getCookie("cookieConsent");
   
   if (!consent) {  // 如果没有同意记录 Cookie，则显示询问窗口
-    let userConsent = confirm("我们使用 Cookie 来存储您的游戏最高分数。您是否同意使用 Cookie？");
+    let userConsent = confirm("我们使用 Cookie 来存储您的游戏最高分数、访问记录等信息。您是否同意使用 Cookie？");
 
     if (userConsent) {
       setCookie("cookieConsent", "true", 365); // 记录用户同意
