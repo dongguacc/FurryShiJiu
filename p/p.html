@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="expires" content="0" />
+    <title>拾玖｜个人网站 主页</title>
+    <link rel="icon" href="../src/favicon.png" type="image/x-icon">
+    <script src="../js/commonality.js"></script>
+    <script src="../js/p.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/p.css">
+    <link rel="stylesheet" type="text/css" href="../css/commonality.css">
+</head>
+<body>
+    <div id="bg-container">
+        <video autoplay muted loop id="background-video" playsinline>
+            <img src="../src/background/1.jpg" alt="备用背景图" id="fallback-image">
+        </video>
+    </div>
+
+    <div id="container">
+        <div id="info">
+            <div class="info-box">
+                <h2>个人信息</h2>
+                <img src="http://q1.qlogo.cn/g?b=qq&nk=2371065680&s=100" alt="头像" class="avatar">
+                <p class="name">兽奴拾玖</p>
+            </div>
+            <div class="info-box1">
+                <div class="qr-code-container">
+                    <a href="https://tool.gljlw.com/qq/?qq=2371065680" target="_new">
+                        <img src="https://activity.hdslb.com/zzjs/20160608appDownload/img/pc/icon-qq1.png" alt="图标" width="50px" height="50px">
+                    </a>
+                </div>
+                <a href="https://space.bilibili.com/1222132945" target="_new" style="margin-left: 10px;">
+                    <img src="https://ts2.cn.mm.bing.net/th?id=ODLS.e42d2c4d-ad65-4c7a-b0fd-817a1c3bed01&w=32&h=32&qlt=90&pcl=fffffa&o=6&pid=1.2" alt="图标" width="40px" height="40px">
+                </a>
+                <a href="mailto:a23710656@163.com" target="_new" style="margin-left: 10px;">
+                    <img src="https://ts2.cn.mm.bing.net/th?id=ODLS.112e55dc-4008-476c-bb39-88b4f8adb808&w=32&h=32&qlt=96&pcl=fffffa&o=6&pid=1.2" alt="图标" width="40px" height="40px">
+                </a>
+            </div>
+            <div class="info-box">
+                <div id="countdown">生日倒计时加载中...</div>
+                <div id="site-timer">建站正计时加载中...</div>
+                <script>
+                    const updateCountdown = () => {
+                        const targetDate = new Date('2024-11-28T00:00:00').getTime();
+                        const countdownElement = document.getElementById('countdown');
+                        const now = Date.now();
+                        const remainingTime = targetDate - now;
+
+                        if (remainingTime < 0) {
+                            countdownElement.textContent = "生日快乐！";
+                        } else {
+                            const days = Math.floor(remainingTime / (1000 * 60 * 60 * 24));
+                            const hours = Math.floor((remainingTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                            const minutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
+                            const seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
+                            countdownElement.textContent = `生日:${days}天 ${hours}小时 ${minutes}分钟 ${seconds}秒`;
+                        }
+                    };
+
+                    const updateSiteTimer = () => {
+                        const startTime = new Date('2024-09-16T15:45:00').getTime();
+                        const siteTimerElement = document.getElementById('site-timer');
+                        const now = Date.now();
+                        const elapsedTime = now - startTime;
+
+                        const days = Math.floor(elapsedTime / (1000 * 60 * 60 * 24));
+                        const hours = Math.floor((elapsedTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                        const minutes = Math.floor((elapsedTime % (1000 * 60 * 60)) / (1000 * 60));
+                        const seconds = Math.floor((elapsedTime % (1000 * 60)) / 1000);
+                        siteTimerElement.textContent = `建站:${days}天 ${hours}小时 ${minutes}分钟 ${seconds}秒`;
+                    };
+
+                    setInterval(updateCountdown, 1000);
+                    setInterval(updateSiteTimer, 1000);
+                </script>
+            </div>
+        </div>
+        <div id="content"></div>
+    </div>
+
+    <div class="footer">
+        <p>版权所有 &copy; 2024 <a href="https://space.bilibili.com/1222132945" target="_new">拾玖</a><br>
+        禁止在未授权的情况下使用任何内容，包括但不限于修改源码建站、转载、使用图片、视频等。
+        如需学习，可<a href="https://github.com/furry19sj/furry19sj.github.io" target="_new">前往GitHub查看源代码</a>。</p>
+    </div>
+</body>
+</html>

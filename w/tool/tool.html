@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>拾玖｜个人网站 工具箱</title>
+    <link rel="icon" href="../src/favicon.png" type="image/x-icon">
+    <script src="../../js/No-cell-phones.js"></script>
+    <script src="../../js/commonality.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../css/commonality.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            min-height: 100vh;
+            flex-direction: column;
+            position: relative;
+            padding-top: 40px;
+        }
+
+        .container {
+            text-align: center;
+            backdrop-filter: blur(10px);
+            background-color: rgba(255, 255, 255, 0.55);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            width: 60%;
+            height: auto;
+            margin: 10px 0;
+            min-width: 400px;
+            max-width: 1600px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            margin: 5px 5px 5px 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+            width: 160px;
+            text-align: center;
+            height: 40px;
+        }
+
+        #download-pcl2 {
+            color: white;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+        #bg-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+        #background-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .nav {
+            position: absolute; 
+            top: 0;
+            height: 40px;
+            backdrop-filter: blur(30px);
+            background-color: rgba(255, 255, 255, 0.70);
+            list-style: none;
+            text-decoration: none;
+            z-index: 1000;
+            width: 100%;
+
+        }
+        .nav-list li {
+            float: left;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            width: 100px;
+        }
+        .nav-list {
+            list-style-type: none;
+            width: 1200px;
+        }
+        .nav-list a:hover {
+            background: rgb(108, 199, 217, 0.5);
+        }
+        .nav-list a {
+            display: block;
+            color: black;
+            font-weight: bold;
+            text-shadow: 
+                1px 1px 0 rgba(255, 255, 255, 0.5),
+                -1px -1px 0 rgba(255, 255, 255, 0.5),
+                1px -1px 0 rgba(255, 255, 255, 0.5),
+                -1px 1px 0 rgba(255, 255, 255, 0.5),
+                0 1px 0 rgba(255, 255, 255, 0.5),
+                0 -1px 0 rgba(255, 255, 255, 0.5);
+        }
+        #myBtn {
+            display: none;
+            position: fixed; 
+            bottom: 20px; 
+            right: 30px; 
+            z-index: 99; 
+            border: none;
+            outline: none; 
+            background-color: #6cc7d9;
+            transition: background 0.3s;
+            color: white;
+            cursor: pointer; 
+            padding: 15px; 
+            border-radius: 10px;
+        }
+        #myBtn:hover {
+                background-color: #0056b3;
+        }
+        .Back-to-top {
+            width: 36px;
+            height: 36px;
+        }
+        
+        a {
+            color: black;
+            text-decoration: none;
+        }
+    </style>
+    <script>
+        const backgroundVideos = [
+            "../../src/background/mp4/1.mp4", 
+            "../../src/background/mp4/2.mp4", 
+            "../../src/background/mp4/3.mp4",
+            "../../src/background/mp4/4.mp4"
+        ];
+
+        const loadBackgroundVideo = () => {
+            const randomIndex = Math.floor(Math.random() * backgroundVideos.length);
+            const selectedVideo = backgroundVideos[randomIndex];
+
+            const videoElement = document.getElementById('background-video');
+            videoElement.src = selectedVideo;
+        };
+
+        window.onload = function() {
+            loadBackgroundVideo();
+            loadContent();
+        };
+
+        window.onscroll = function() {scrollFunction()};
+
+        function scrollFunction() {
+            console.log(121);
+            if (document.body.scrollTop > 40 || document.documentElement.scrollTop > 40) {
+                document.getElementById("myBtn").style.display = "block";
+            } else {
+                document.getElementById("myBtn").style.display = "none";
+            }
+        }
+
+        function topFunction() {
+            const start = document.documentElement.scrollTop || document.body.scrollTop;
+            const duration = 800;
+            let startTime = null;
+
+            function animation(currentTime) {
+                if (!startTime) startTime = currentTime;
+                const timeElapsed = currentTime - startTime;
+                const progress = Math.min(timeElapsed / duration, 1);
+
+                const ease = 1 - Math.pow(1 - progress, 3);
+                const scrollToY = start * (1 - ease);
+
+                window.scrollTo(0, scrollToY);
+
+                if (timeElapsed < duration) {
+                    requestAnimationFrame(animation);
+                }
+            }
+
+            requestAnimationFrame(animation);
+        }
+    </script>
+</head>
+<body>
+    <div id="bg-container">
+        <video autoplay muted loop id="background-video">
+            <img src="../src/background/1.jpg" alt="备用背景图" id="fallback-image">
+        </video>
+    </div>
+    <button onclick="topFunction()" id="myBtn"><img src="../src/favicon.png" class="Back-to-top"></button>
+    <div class="nav">
+        <ul class="nav-list">
+            <li><a href="../../index.html">首页</a></li>
+            <li><a href="#">关于</a></li>
+            <li><a href="../html/blog.html">博客</a></li>
+            <li><a>工具箱</a></li>
+        </ul>
+    </div>
+    <div class="container">
+        <h1>Web工具箱</h1>
+    </div>
+    <div class="container">
+        <h1>小游戏</h1>
+        <button onclick="window.location.href='Gluttonous-Snake/Gluttonous-Snake.html'">贪吃蛇</button>
+        <button onclick="window.location.href='http://webcs.xyz/'">反恐精英</button></br>
+        <button onclick="window.location.href='Minecraft/Minecraft-1.8.8.html'">我的世界</button>
+    </div>
+    <div class="container">
+        <h1>工具</h1>
+        <button onclick="window.location.href='https://media.st.dl.eccdnx.com/client/installer/SteamSetup.exe'">下载Steam</button>
+        <button><a href="../../src/exe/plc2/Plain-Craft-Launche-2.exe" download="Plain-Craft-Launche-2.exe" id="download-pcl2">下载PCL2</a></button>
+
+    </div>
+</body>
+</html>
