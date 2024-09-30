@@ -18,6 +18,7 @@ let snake,
   cells = 20,
   cellSize,
   isGameOver = false,
+  isPaused = false,
   tails = [],
   score = 0,
   maxScore = getCookie("maxScore") || 0,
@@ -162,15 +163,20 @@ let KEY = {
       },
       false
     );
+
+    addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        isPaused = !isPaused;
+        if (!isPaused) loop();
+      }
+    });
   }
 };
 
 class Snake {
-  constructor(i, type) {
+  constructor(i) {
     this.pos = new helpers.Vec(W / 2, H / 2);
     this.dir = new helpers.Vec(0, 0);
-    this.type = type;
-    this.index = i;
     this.delay = 5;
     this.size = W / cells;
     this.color = "white";
@@ -208,7 +214,7 @@ class Snake {
       this.pos.x = W - cellSize;
     }
   }
-  controlls() {
+  controls() {
     let dir = this.size;
     if (KEY.ArrowUp) {
       this.dir = new helpers.Vec(0, -dir);
@@ -234,7 +240,7 @@ class Snake {
   update() {
     this.walls();
     this.draw();
-    this.controlls();
+    this.controls();
     if (!this.delay--) {
       if (helpers.isCollision(this.pos, food.pos)) {
         incrementScore();
@@ -365,7 +371,6 @@ function initialize() {
   snake = new Snake();
   food = new Food();
 
-  // 检查 Cookie 并提示用户
   checkCookieConsent();
 
   dom_replay.addEventListener("click", reset, false);
@@ -375,22 +380,26 @@ function initialize() {
 function checkCookieConsent() {
   let consent = getCookie("cookieConsent");
   
-  if (!consent) {  // 如果没有同意记录 Cookie，则显示询问窗口
+  if (!consent) {
     let userConsent = confirm("我们使用 Cookie 来存储您的游戏最高分数、访问记录等信息。您是否同意使用 Cookie？");
 
     if (userConsent) {
-      setCookie("cookieConsent", "true", 365); // 记录用户同意
+      setCookie("cookieConsent", "true", 365);
     }
   }
 }
 
 function loop() {
   clear();
-  if (!isGameOver) {
+  helpers.drawGrid();
+  snake.draw();
+  food.draw();
+  
+  if (isPaused) {
+    showPauseMessage();
+  } else if (!isGameOver) {
     requestID = setTimeout(loop, 1000 / 60);
-    helpers.drawGrid();
     snake.update();
-    food.draw();
     for (let p of particles) {
       p.update();
     }
@@ -401,11 +410,21 @@ function loop() {
   }
 }
 
+function showPauseMessage() {
+  CTX.fillStyle = "rgba(0, 0, 0, 0.2)";
+  CTX.fillRect(0, 0, W, H);
+  CTX.fillStyle = "#ffffff";
+  CTX.textAlign = "center";
+  CTX.font = "bold 30px Poppins, sans-serif";
+  CTX.fillText("游戏暂停", W / 2, H / 2);
+  CTX.font = "15px Poppins, sans-serif";
+  CTX.fillText("按 Esc 键继续", W / 2, H / 2 + 30);
+}
+
 function gameOver() {
   maxScore ? null : (maxScore = score);
   score > maxScore ? (maxScore = score) : null;
   
-  // 只有在用户同意的情况下才记录最高分
   if (getCookie("cookieConsent")) {
     setCookie("maxScore", maxScore, 365);
   }
@@ -426,6 +445,7 @@ function reset() {
   food.spawn();
   KEY.resetState();
   isGameOver = false;
+  isPaused = false;
   clearTimeout(requestID);
   loop();
 }
