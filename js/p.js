@@ -35,7 +35,14 @@ window.onload = function() { /* 网页加载完成时执行 */
     loadContent(); // 加载外部内容
     };
 
-if (navigator.userAgent.indexOf("Windows") !== -1 || navigator.userAgent.indexOf("Macintosh") !== -1 || navigator.userAgent.indexOf("Linux") !== -1) {
-    // 电脑访问，重定向
-    window.location.href = "../w/w.html";
-}
+    
+(function() {
+    var userAgent = navigator.userAgent;
+
+    var isMobile = /iPhone|iPad|iPod|Android|BlackBerry|IEMobile|Opera Mini/i.test(userAgent);
+
+    if (isMobile) {
+    } else {
+        window.location.href = "../w/w.html";
+    }
+})();

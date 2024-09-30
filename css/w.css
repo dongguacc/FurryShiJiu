@@ -114,7 +114,7 @@ a {
 }
 .footer p {
     margin: 5px 0;
-    font-size: 12px;
+    font-size: 10px;
 }
 * {
     margin: 0;
@@ -166,7 +166,7 @@ a {
     color: white;
     cursor: pointer; 
     padding: 15px; 
-    border-radius: 10px;
+    border-radius: 12px;
 }
 #myBtn:hover {
     background-color: #0056b3;
