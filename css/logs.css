@@ -1,0 +1,82 @@
+/* blog.css */
+body {
+    margin: 0; /* 去掉默认的边距，避免浏览器默认样式影响布局 */
+    display: flex; /* 使用弹性布局，使子元素可以灵活排列 */
+    justify-content: center; /* 水平居中内容 */
+    align-items: stretch; /* 垂直拉伸子元素以匹配容器高度 */
+    height: 100vh; /* 设置视口高度为100%，使页面充满浏览器窗口 */
+    overflow: hidden; /* 隐藏超出视口的内容，避免出现滚动条 */
+    flex-direction: column; /* 确保子元素以列的方式垂直排列 */
+}
+#bg-container {
+    position: fixed; /* 使背景视频固定在视口，不随内容滚动 */
+    top: 0; /* 背景容器与视口顶部对齐 */
+    left: 0; /* 背景容器与视口左侧对齐 */
+    width: 100%; /* 背景容器宽度设置为100% */
+    height: 100%; /* 背景容器高度设置为100% */
+    z-index: -1; /* 背景层在内容层后面，确保内容可见 */
+}
+#background-video {
+    width: 100%; /* 视频宽度设置为100%，填充背景容器 */
+    height: 100%; /* 视频高度设置为100% */
+    object-fit: cover; /* 保持视频比例并覆盖整个容器 */
+}
+#content {
+    flex-grow: 1; /* 内容区域占据剩余的空间，保持完整的布局 */
+    margin: 0 10px; /* 上下边距为0，左右各10px的间距 */
+    display: flex; /* 使用Flexbox布局，方便子元素排列 */
+    flex-direction: column; /* 纵向排列内容 */
+    align-items: center; /* 内容居中对齐 */
+}
+.content-box {
+    backdrop-filter: blur(10px); /* 使背景模糊，增加视觉深度 */
+    background-color: rgba(255, 255, 255, 0.5); /* 设置半透明白色背景 */
+    border-radius: 10px; /* 设置圆角，使内容框体边缘平滑 */
+    padding: 10px; /* 内容框体内间距，增加内容与边框的距离 */
+    text-align: center; /* 文本居中对齐 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 添加阴影效果，使内容框体更立体 */
+    margin: 20px; /* 上下边距为20px，增加内容之间的间隔 */
+    width: 100%; /* 内容框宽度设置为100% */
+    max-width: 90%; /* 内容框最大宽度设置为90%，以适应手机屏幕 */
+}
+a {
+    color: black; /* 链接文字颜色设置为黑色 */
+    text-decoration: none; /* 去掉链接下划线，保持干净的外观 */
+}
+* {
+    margin: 0; /* 去掉所有元素的默认边距 */
+    padding: 0; /* 去掉所有元素的默认内边距 */
+}
+.nav {
+    height: 40px; /* 导航栏高度设置为40px */
+    backdrop-filter: blur(30px); /* 设置背景模糊效果 */
+    background-color: rgba(255, 255, 255, 0.5); /* 设置半透明背景 */
+    list-style: none; /* 去掉列表项的默认标记 */
+    text-decoration: none; /* 去掉文本下划线 */
+}
+.nav-list li {
+    float: left; /* 使导航项水平排列 */
+    height: 40px; /* 每个导航项高度设置为40px */
+    line-height: 40px; /* 行高与高度相同，实现垂直居中 */
+    text-align: center; /* 文本水平居中对齐 */
+    width: 100px; /* 每个导航项宽度设置为100px */
+}
+.nav-list {
+    list-style-type: none; /* 去掉默认的列表标记 */
+    width: 100%; /* 设置宽度为100%以适应所有设备 */
+}
+.nav-list a:hover {
+    background: rgb(108, 199, 217, 0.5); /* 鼠标悬停时背景颜色变化，增加交互效果 */
+}
+.nav-list a {
+    display: block; /* 使链接占据整个列表项区域 */
+    color: black; /* 主文本颜色设置为黑色 */
+    font-weight: bold; /* 增加字体的粗细，使文字更突出 */
+    text-shadow: 
+        1px 1px 0 rgba(255, 255, 255, 0.5),  /* 右下方的白色阴影 */
+        -1px -1px 0 rgba(255, 255, 255, 0.5), /* 左上方的白色阴影 */
+        1px -1px 0 rgba(255, 255, 255, 0.5),  /* 右上方的白色阴影 */
+        -1px 1px 0 rgba(255, 255, 255, 0.5),  /* 左下方的白色阴影 */
+        0 1px 0 rgba(255, 255, 255, 0.5),     /* 正下方的白色阴影 */
+        0 -1px 0 rgba(255, 255, 255, 0.5);    /* 正上方的白色阴影 */
+}

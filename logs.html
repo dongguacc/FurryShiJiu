@@ -1,0 +1,68 @@
+<!DOCTYPE html> <!-- 声明文档类型为HTML5 -->
+<html lang="zh"> <!-- 设置文档语言为中文 -->
+<head>
+    <meta charset="UTF-8"> <!-- 设置文档字符编码为UTF-8 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- 设置视口以适应不同屏幕 -->
+    <meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate" /> <!-- 禁用缓存 -->
+    <meta http-equiv="pragma" content="no-cache" /> <!-- 兼容旧版缓存设置 -->
+    <meta http-equiv="expires" content="0" /> <!-- 设置过期时间为0，立即过期 -->
+    <title>测试</title> <!-- 设置网页标题 -->
+    <link rel="icon" href="src/favicon.png" type="image/x-icon"> <!-- 设置网页图标 -->
+    <script src="js/commonality.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/logs.css">
+    <link rel="stylesheet" type="text/css" href="css/commonality.css">
+    <script>
+        const backgroundVideos = [
+            "src/background/mp4/1.mp4", 
+            "src/background/mp4/2.mp4", 
+            "src/background/mp4/3.mp4",
+            "src/background/mp4/4.mp4"
+        ];
+
+        window.onload = function() {
+            const randomIndex = Math.floor(Math.random() * backgroundVideos.length);
+            const selectedVideo = backgroundVideos[randomIndex];
+
+            const videoElement = document.getElementById('background-video');
+            videoElement.src = selectedVideo;
+        };
+
+    </script>
+</head>
+<body>
+    <div id="bg-container"> <!-- 背景容器 -->
+        <video autoplay muted loop id="background-video" onerror="console.error('背景视频加载失败');"> <!-- 背景视频 -->
+            <source src="src/background/video.mp4" type="video/mp4"> <!-- 视频源 -->
+            <img src="src/background/1.jpg" alt="备用背景图" id="fallback-image"> <!-- 备用背景图片 -->
+        </video>
+    </div>
+    
+    <div class="nav">
+        <ul class="nav-list">
+            <li><a href="index.html">首页</a></li>
+        </ul>
+    </div>
+    <div id="content"> <!-- 内容区域 -->
+        <div class="content-box">
+            <h1>2024/9/28 更新日志</h1>
+            <p>—制作了工具箱</p>
+        </div>
+        <div class="content-box">
+            <h1>2024/9/27 更新日志</h1>
+            <p>—制作导航栏</p>
+            <p>—重写js、css代码</p>
+            <p>—添加了返回顶部按钮</p>
+        </div>
+        <div class="content-box">
+            <h1>2024/9/20 更新日志</h1>
+            <p>—修改了布局</p>
+            <p>—制作手机界面</p>
+        </div>
+        <div class="content-box">
+            <h1>2024/9/16 网站测试</h1>
+            <p>欢迎来到拾玖的个人网站，这里将会分享一些个人的兴趣爱好，以及一些技术相关的文章。</p>
+            <p>网站测试期间，网站将会进行大量的改版，网站的功能将会逐渐增加，欢迎大家的反馈。</p>
+        </div>
+    </div>
+</body>
+</html>
